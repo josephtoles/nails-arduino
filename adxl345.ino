@@ -1,6 +1,16 @@
-// ADXL345
+void adxl345_loop(void) {
+  /* Get a new sensor event */ 
+  sensors_event_t event; 
+  accel.getEvent(&event);
 
-void ADXL345_setup(void) {
+  // Save readings to global variables
+  x = event.acceleration.x;
+  y = event.acceleration.y;
+  z = event.acceleration.z;
+}
+
+
+void adxl345_setup(void) {
   Serial.println("Accelerometer Test"); Serial.println("");
   
   // Initialise the sensor
