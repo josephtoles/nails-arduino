@@ -40,8 +40,6 @@ void bluefruit_loop() {
 
   char outputs[16];
 
-  Serial.println("Begin send message");
-
   Serial.print("x=");Serial.println(x);
   Serial.print("y=");Serial.println(y);
   Serial.print("z=");Serial.println(z);

@@ -22,6 +22,7 @@ Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);
 
 // Global variables
 double x, y, z;  // Acceleration along each axis.
+int loop_count = 0;
 
 
 void setup() {
@@ -31,7 +32,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.println("loop something else");
+  Serial.print("Loop ");Serial.println(++loop_count);
   adxl345_loop();
   bluefruit_loop();
 }
