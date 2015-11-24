@@ -21,7 +21,8 @@ Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);
 
 
 // Global variables
-double x, y, z;  // Acceleration along each axis
+double x, y, z;  // Acceleration along each axis.
+
 
 void setup() {
   Serial.begin(9600);

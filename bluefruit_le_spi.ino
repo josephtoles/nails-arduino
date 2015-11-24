@@ -1,7 +1,56 @@
-void bluefruit_loop() {
+/**
+ * Returns the nth digit of an integer, counting from the right
+ * Examples
+ *   get_digit(468, 0) returns 8
+ *   get_digit(357, 1) returns 5
+ *   get_digit(4, 3) return 0
+ */
+int get_digit(int value, int index) {
+  for (int i=0; i<index; ++i) {
+    value /= 10;
+  }
+  return value % 10;
+}
 
+
+/**
+ * Sends an acceleration to bluetooth in three digits in units of 0.1m/s^s
+ * If the acceleration is 9.8m/s^2 it will send 098
+ */
+void send_to_bluetooth(double value) {
+  int scaled_value = (int) (value * 10);
+  for (int i=0; i<3; ++i) {
+    ble.print(get_digit(scaled_value, i));
+  }
+}
+
+
+void bluefruit_loop() {
   // Work out how to send global doubles x, y, z
 
+  char outputs[16];
+
+  Serial.println("Begin send message");
+
+  Serial.print("x=");Serial.println(x);
+  Serial.print("y=");Serial.println(y);
+  Serial.print("z=");Serial.println(z);
+  
+  ble.print("AT+BLEUARTTX=");
+  ble.print("x");send_to_bluetooth(x);
+  ble.print("y");send_to_bluetooth(y);
+  ble.print("z");send_to_bluetooth(z);
+  ble.println("");
+  if (! ble.waitForOK() ) {
+     Serial.println(F("Failed to send check-in?"));
+  }
+  delay(50);
+
+}
+
+
+/*
+void send_data_bytewise(void) {
   char inputs[11];
   inputs[10] = 0;
   for(int i=0; i>10; ++i) {
@@ -12,6 +61,8 @@ void bluefruit_loop() {
   Serial.println("Sending 100 200 300 to app");
   Serial.println("Sent");
 }
+*/
+
 
 void bluefruit_setup() {
   Serial.println(F("Adafruit Bluefruit Command Mode Example"));
