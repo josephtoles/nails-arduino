@@ -19,6 +19,16 @@ int get_digit(int value, int index) {
  */
 void send_to_bluetooth(double value) {
   int scaled_value = (int) (value * 10);
+
+  // Print sign. Then, make scaled_value positive
+  if (scaled_value >= 0) {
+    ble.print("+");
+  } else {
+    ble.print("-");
+    scaled_value *= -1;
+  }
+
+  // Print three digits
   for (int i=0; i<3; ++i) {
     ble.print(get_digit(scaled_value, i));
   }
@@ -40,6 +50,7 @@ void bluefruit_loop() {
   ble.print("x");send_to_bluetooth(x);
   ble.print("y");send_to_bluetooth(y);
   ble.print("z");send_to_bluetooth(z);
+
   ble.println("");
   if (! ble.waitForOK() ) {
      Serial.println(F("Failed to send check-in?"));
