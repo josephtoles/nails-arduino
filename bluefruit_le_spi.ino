@@ -18,7 +18,8 @@ int get_digit(int value, int index) {
  * If the acceleration is 9.8m/s^2 it will send 098
  */
 void send_to_bluetooth(double value) {
-  int scaled_value = (int) (value * 10);
+  int scaled_value = (int) (value * 10.0);
+  Serial.print("scaled value is");Serial.println(scaled_value);
 
   // Print sign. Then, make scaled_value positive
   if (scaled_value >= 0) {
@@ -29,7 +30,7 @@ void send_to_bluetooth(double value) {
   }
 
   // Print three digits
-  for (int i=0; i<3; ++i) {
+  for (int i=2; i>=0; --i) {
     ble.print(get_digit(scaled_value, i));
   }
 }
