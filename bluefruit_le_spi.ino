@@ -40,9 +40,10 @@ void bluefruit_loop() {
 
   char outputs[16];
 
-  Serial.print("x=");Serial.println(x);
-  Serial.print("y=");Serial.println(y);
-  Serial.print("z=");Serial.println(z);
+  Serial.print(" x=");Serial.print(x);
+  Serial.print(" y=");Serial.print(y);
+  Serial.print(" z=");Serial.print(z);
+  Serial.println("");
   
   //ble.print("AT+BLEUARTTX=");
   ble.print("x");send_to_bluetooth(x);
@@ -52,8 +53,8 @@ void bluefruit_loop() {
 ble.println("");
 
   if (! ble.waitForOK() ) {
-    // Don't know what's happening here. Disabled to keep output getting flooded
-     Serial.println(F("Failed to send check-in?"));
+    //Don't know what's happening here. Disabled to keep output getting flooded
+    //Serial.println(F("Failed to send check-in?"));
   }
   delay(50);
 

@@ -32,7 +32,7 @@ void setup() {
 }
 
 void loop() {
-  Serial.print("\nLoop ");Serial.println(++loop_count);
+  Serial.print("Loop ");Serial.print(++loop_count);
   adxl345_loop();
   bluefruit_loop();
 }
